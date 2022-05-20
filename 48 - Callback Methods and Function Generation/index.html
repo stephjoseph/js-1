@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Array Cardio - Callback Methods and Function Generation</title>
+    <link rel="stylesheet" href="../../base.css" />
+  </head>
+
+  <body>
+    <script>
+      const toppings = [
+        "Mushrooms ",
+        "Tomatoes",
+        "Eggs",
+        "Chili",
+        "Lettuce",
+        "Avocado",
+        "Chiles",
+        "Bacon",
+        "Pickles",
+        "Onions",
+        "Cheese",
+      ];
+
+      const buns = ["egg", "wonder", "brioche"];
+
+      const meats = {
+        beyond: 10,
+        beef: 5,
+        pork: 7,
+      };
+
+      const prices = {
+        hotDog: 453,
+        burger: 765,
+        sausage: 634,
+        corn: 234,
+      };
+
+      const orderTotals = [342, 1002, 523, 34, 634, 854, 1644, 2222];
+
+      const feedback = [
+        { comment: "Love the burgs", rating: 4 },
+        { comment: "Horrible Service", rating: 2 },
+        { comment: "Smoothies are great, liked the burger too", rating: 5 },
+        { comment: "Ambiance needs work", rating: 3 },
+        { comment: "I DON'T LIKE BURGERS", rating: 1 },
+      ];
+
+      /*
+      Callback Methods
+    */
+
+      function findByWord(word) {
+        return function (singleFeedback) {
+          return singleFeedback.comment.includes(word);
+        };
+      }
+
+      // find the first rating that talks about a burger with find()
+      function findBurgRating(rating) {
+        return rating.comment.includes("burg");
+      }
+      const burgerRating = feedback.find(findByWord("burg"));
+      console.log(burgerRating);
+      // find all ratings that are above 2 with filter()
+      const above2Ratings = feedback.filter((feedback) => feedback.rating > 2);
+      console.log(above2Ratings);
+      // find all ratings that talk about a burger with filter()
+      const burgerRatings = feedback.filter(findByWord("burg"));
+      console.log(burgerRatings);
+      // Remove the one star rating however you like!
+      const removeOneStarRating = feedback.filter(
+        (feedback) => feedback.rating !== 1
+      );
+      console.log(removeOneStarRating);
+
+      // check if there is at least 5 of one type of meat with some()
+      const isThereAtLeastFiveOfType = Object.values(meats).some(
+        (meatCount) => meatCount >= 5
+      );
+      console.log(isThereAtLeastFiveOfType);
+      // make sure we have at least 3 of every meat with every()
+      const atLeastThreeOfEveryType = Object.values(meats).every(
+        (meatCount) => meatCount >= 3
+      );
+      console.log(atLeastThreeOfEveryType);
+      // sort the toppings alphabetically with sort()
+      const sortedToppings = toppings.sort((a, b) => {
+        return a[0] > b[0];
+      });
+
+      console.log(sortedToppings);
+      // sort the order totals from most expensive to least with .sort()
+      const sortedTotals = orderTotals.sort((a, b) => b - a);
+      console.log(sortedTotals);
+      // Sort the prices with sort()
+      const sortedPrices = Object.entries(prices).sort((a, b) => {
+        const PriceA = a[1];
+        const PriceB = b[1];
+        return PriceB - PriceA;
+      });
+
+      console.log(sortedPrices);
+    </script>
+  </body>
+</html>
