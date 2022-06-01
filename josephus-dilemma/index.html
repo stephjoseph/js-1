@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Josephus Dilemma</title>
+  </head>
+  <body>
+    <h1>Josephus Dilemma</h1>
+    <p>See console for the solution :)</p>
+
+    <script>
+      function josephusDilemma(n, k) {
+        // Create an array of prisoner numbers from 1 to n
+        let prisoners = {
+          alive: [],
+          dead: [],
+        };
+
+        for (let i = 1; i <= n; i++) {
+          prisoners.alive.push(i);
+        }
+        console.log(prisoners.alive);
+
+        // initialize variable for the position of the prisoner to be killed, in this case 0 given that prisoner positioned at 0 starts the execution cycle
+        let deadPrisoner = 0;
+        // create a while loop that runs until there is 1 prisoner left
+        while (prisoners.alive.length > 1) {
+          // determine deadPrisoner's position relative to the kill interval, we subtract 1 since arrays are zero-indexed
+          const deadPrisonerPosition = deadPrisoner + k - 1;
+          // the current deadPrisoner is equal to the modulus of the deadPrisonerPosition to the alive prisoners array length
+          deadPrisoner = deadPrisonerPosition % prisoners.alive.length;
+          // remove the dead prisoner from the alive array, then push it to the dead array
+          prisoners.dead.push(...prisoners.alive.splice(deadPrisoner, 1));
+          console.log(prisoners.alive, prisoners.dead);
+        }
+
+        const survivalPosition = prisoners[0];
+        return survivalPosition;
+      }
+
+      console.log(josephusDilemma(41, 2));
+    </script>
+  </body>
+</html>
