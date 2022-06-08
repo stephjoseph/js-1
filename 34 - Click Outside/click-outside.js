@@ -12,7 +12,7 @@ function handleCardButtonClick(e) {
     <img width="600" height="600" src="${imgSrc.replace(
       200,
       600
-    )} alt="${description}>
+    )}" alt="${description}">
     <p>${description}</p>
   `;
 
